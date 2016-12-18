@@ -19,6 +19,8 @@ class Migration extends Admin_Controller
         if ($this->migration->current() === FALSE)
         {
             show_error($this->migration->error_string());
+        }else{
+            echo 'Migration worked';
         }
     }
 
