@@ -1,6 +1,25 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
+
+/**
+ * Custom CA autoload to load custom files from libraries
+ * @param $className
+ */
+function __autoload($className)
+{
+    //if the class name doesn't start with CI_ include it
+    if(strpos($className, 'CI_') !== 0)
+    {
+        $file = APPPATH .'libraries/'. $className .'.php';
+        // if that file exists and if its a valid file include it
+        if(file_exists($file) && is_file($file))
+        {
+            @include_once($file);
+        }
+    }
+}
+
 /*
 |--------------------------------------------------------------------------
 | Base Site URL

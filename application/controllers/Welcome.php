@@ -1,7 +1,7 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class Welcome extends CA_Controller {
+class Welcome extends Frontend_Controller {
 
 
 	/**
@@ -22,6 +22,6 @@ class Welcome extends CA_Controller {
 	public function index()
 	{
         var_dump($this->data);
-		//$this->load->view('welcome_message');
+		$this->load->view('welcome_message');
 	}
 }
