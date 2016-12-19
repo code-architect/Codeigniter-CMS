@@ -87,7 +87,7 @@ class CA_Model extends CI_Model
         {
             //update
             $filter = $this->_primary_filter;
-            $id = $filter($data[$this->_primary_key]);
+            $id = $filter($id);
             $this->db->set($data);
             $this->db->where($this->_primary_key, $id);
             $this->db->update($this->_table_name);
@@ -99,9 +99,19 @@ class CA_Model extends CI_Model
     //-----------------------------------------------------------------------------------------
 
 
-    public function delete()
+    public function delete($id)
     {
+        $filter = $this->_primary_filter;
+        $id = $filter($id);
 
+        //if we do not have id, we will not delete anything
+        if(!$id)
+        {
+            return false;
+        }
+        $this->db->where($this->_primary_key, $id);
+        $this->db->limit(1);
+        $this->db->delete($this->_table_name);
     }
 
     //-----------------------------------------------------------------------------------------
