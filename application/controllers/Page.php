@@ -19,4 +19,17 @@ class Page extends Frontend_Controller
         print_r($pages);
     }
 
+    public function save()
+    {
+        $data = [
+            'page_title' => 'Contact Us',
+            'page_slug' =>  'contact',
+            'page_order' => '3',
+            'page_body' => 'contact me please'
+        ];
+        $pages = $this->Page_m->save($data);
+        echo "<pre>";
+        print_r($pages);
+    }
+
 } 

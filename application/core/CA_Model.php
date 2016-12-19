@@ -16,7 +16,12 @@ class CA_Model extends CI_Model
 
     //-----------------------------------------------------------------------------------------
 
-
+    /**
+     * Get data by given input
+     * @param null $id
+     * @param bool $single
+     * @return mixed
+     */
     public function get($id = NULL, $single = FALSE)
     {
         // if we have an id filter it, and run a where statement, and return a single row
@@ -45,6 +50,12 @@ class CA_Model extends CI_Model
     //-----------------------------------------------------------------------------------------
 
 
+    /**
+     * GEt data by where condition
+     * @param $where
+     * @param bool $single
+     * @return mixed
+     */
     public function get_by($where, $single = FALSE)
     {
         $this->db->where($where);
@@ -54,9 +65,35 @@ class CA_Model extends CI_Model
 
     //-----------------------------------------------------------------------------------------
 
-    public function save()
+    public function save($data, $id = null)
     {
+        // check if have set timestamps
+        if($this->_timestamp == true)
+        {
+            $now = date('Y-m-d H:i:s');
+            $id || $data['created'] = $now;
+            $data['modified'] = $now;
+        }
 
+        // if id not present it's an insert
+        if($id === null)
+        {
+            // if primary key is set , set it to null when inserting
+            !isset($data[$this->_primary_key]) || $data[$this->_primary_key] = null;
+            $this->db->set($data);
+            $this->db->insert($this->_table_name);
+            $id = $this->db->insert_id();
+        }else
+        {
+            //update
+            $filter = $this->_primary_filter;
+            $id = $filter($data[$this->_primary_key]);
+            $this->db->set($data);
+            $this->db->where($this->_primary_key, $id);
+            $this->db->update($this->_table_name);
+        }
+
+        return $id;
     }
 
     //-----------------------------------------------------------------------------------------
