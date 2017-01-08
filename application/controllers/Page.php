@@ -14,23 +14,10 @@ class Page extends Frontend_Controller
 
     public function index()
     {
-        $pages = $this->Page_m->get_by(['page_slug' => 'about']);
+        $pages = $this->Page_m->get();
         echo "<pre>";
         print_r($pages);
     }
 
-    public function save()
-    {
-        $data = [
-            'page_order' => '3',
-        ];
-        $pages = $this->Page_m->save($data, 3);
-        echo "<pre>";
-        print_r($pages);
-    }
 
-    public function delete()
-    {
-        $this->Page_m->delete(3);
-    }
 } 
