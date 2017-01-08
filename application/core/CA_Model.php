@@ -43,7 +43,10 @@ class CA_Model extends CI_Model
             $method = 'result';
         }
 
-        $this->db->order_by($this->_order_by);
+        // If an order is already set by db library, set it
+        if($this->_order_by != '' || $this->_order_by != null){
+            $this->db->order_by($this->_order_by);
+        }
         return $this->db->get($this->_table_name)->$method();
     }
 
