@@ -6,7 +6,7 @@ class CA_Model extends CI_Model
     protected $_primary_key = '';
     protected $_primary_filter = 'intval';
     protected $_order_by = '';
-    protected $_rules = [];
+    public $_rules = [];
     protected $_timestamp = FALSE;
 
     function __construct()
