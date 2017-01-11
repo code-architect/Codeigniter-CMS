@@ -9,5 +9,6 @@ class Admin_Controller extends CA_Controller
         $this->data['meta_title'] = 'Code-Architect';
         $this->load->helper('form');
         $this->load->library('form_validation');
+        $this->load->model('user_m');
     }
 }
