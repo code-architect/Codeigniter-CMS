@@ -9,7 +9,7 @@ class Page_m extends CA_Model
     protected $_primary_key = 'page_id';
     protected $_primary_filter = 'intval';
     protected $_order_by = 'page_order';
-    protected $_rules = [];
+    public $_rules = [];
     protected $_timestamp = FALSE;
 
 
